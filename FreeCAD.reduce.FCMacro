@@ -1,0 +1,22 @@
+import FreeCAD
+import FreeCADGui
+
+from pprint import pprint
+
+maxvolume = 10000.0
+sel = FreeCADGui.Selection.getSelection() 
+count = 0
+
+for obj in FreeCAD.ActiveDocument.Objects:
+	#print obj.Name
+	#pprint(vars(obj))
+	if hasattr(obj, 'Shape'):
+			
+		if (maxvolume > obj.Shape.Volume):
+			FreeCADGui.Selection.addSelection(obj)
+			count = count + 1
+			print count
+			print obj.Name
+			print obj.Shape.Volume	
+
+FreeCAD.ActiveDocument.recompute()
